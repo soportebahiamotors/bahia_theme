@@ -1,0 +1,64 @@
+/*
+ * Bahia Theme — colores de marca sobre el Desk de ERPNext
+ * ---------------------------------------------------------------------
+ * Selectores confirmados leyendo el código fuente real servido en
+ * erpnext.bahiatech.io (frappe 16.25.0, apps/frappe/frappe/desk/page/desktop/
+ * y apps/frappe/frappe/public/js/frappe/utils/utils.js), NO adivinados.
+ * No se toca ningún archivo core: esta hoja se inyecta vía hooks.py
+ * (app_include_css) y le gana a los estilos inline que pone el JS de
+ * Frappe gracias a !important donde hace falta.
+ */
+
+/* 1) Fondo de pantalla sutil (tinte azul frío).
+ * `.desktop-wrapper` es el contenedor raíz de la página "desktop"
+ * (frappe/desk/page/desktop/desktop.html) — es decir, el switcher de
+ * módulos de /desk. No tiene background-color propio en el core
+ * (desktop.css solo lo define para hijos puntuales), así que esta regla
+ * no compite con nada y queda acotada a esa página, sin tocar el resto
+ * del Desk (formularios, listas, reportes, etc.). */
+.desktop-wrapper {
+	background-color: #f1f4f9;
+}
+
+/* 2) Gris Pizarra / Petroleo — íconos de la fila superior del switcher
+ * de módulos que hoy no tienen ícono real (bg_color = "gray" en el
+ * DocType "Desktop Icon" -> Frappe dibuja una letra sobre un
+ * div.icon-container con background-color puesto INLINE por JS, sin
+ * !important: frappe.utils.desktop_icon() en utils.js).
+ * Confirmado en la base (bench --site frontend mariadb) que estos 4 son
+ * los únicos "Desktop Icon" custom de Bahía sin ícono SVG propio. */
+a.desktop-icon[data-id="Fidelizacion"] .icon-container,
+a.desktop-icon[data-id="Mesa de Servicio"] .icon-container,
+a.desktop-icon[data-id="Posventa"] .icon-container,
+a.desktop-icon[data-id="Ventas y Facturacion"] .icon-container {
+	background-color: #314e57 !important;
+}
+
+/* 3) Azul Marino Corporativo (#19518A) — pedido para los íconos de
+ * "módulos principales" (Contabilidad, Bienes, Compras, Manufactura,
+ * Proyectos, Calidad, Ventas, Almacén, Subcontratación, Configuración
+ * de ERPNext, etc.).
+ *
+ * NO SE APLICA: esos íconos se renderizan como <img class="app-icon">
+ * apuntando a un .svg pre-armado (ej. apps/erpnext/erpnext/public/icons/
+ * desktop_icons/{solid,subtle}/*.svg) con el color ya "horneado" adentro
+ * del archivo. CSS no puede recolorear el contenido de una imagen SVG
+ * externa cargada por <img>.
+ *
+ * Se revisó explícitamente en la base si existía algún otro "Desktop
+ * Icon" con bg_color seteado que SÍ cayera en el mecanismo dinámico
+ * (letra + color de fondo) fuera de la fila de Bahía de arriba: hay 3
+ * registros más ("Accounts Setup", "Organization", "Payments", todos
+ * con bg_color = "blue"), pero los tres SÍ tienen un .svg propio
+ * (accounts_setup.svg, organization.svg, payments.svg) en
+ * apps/erpnext/erpnext/public/icons/desktop_icons/, así que en tiempo de
+ * render frappe.utils.get_desktop_icon() encuentra ese archivo primero y
+ * el bg_color de esos tres queda sin uso real — no hay ganancia visual
+ * en apuntarles con CSS.
+ *
+ * Conclusión: no hay ningún ícono adicional afectable por CSS para este
+ * color en esta instancia. Para lograrlo habría que reemplazar los
+ * archivos .svg de esos íconos por versiones con el azul horneado
+ * adentro (cambio de assets, no de CSS) — deliberadamente fuera de
+ * alcance de este cambio.
+ */

@@ -1,0 +1,24 @@
+[project]
+name = "bahia_theme"
+authors = [
+    { name = "Bahia Motors", email = "jean.guerrel@bahiamotors.com" }
+]
+description = "Tema visual corporativo (colores de marca) para el Desk de ERPNext en Bahia Motors"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = [
+    # "frappe~=16.0.0" # Installed and managed by bench.
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+# These dependencies are only installed when developer mode is enabled
+[tool.bench.dev-dependencies]
+# package_name = "~=1.1.0"
+
+# These apt dependencies will be installed from Ubuntu repositories when you host your app on Frappe Cloud
+[deploy.dependencies.apt]
+packages = []
