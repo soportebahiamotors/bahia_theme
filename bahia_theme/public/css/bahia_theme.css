@@ -62,3 +62,23 @@ a.desktop-icon[data-id="Ventas y Facturacion"] .icon-container {
  * adentro (cambio de assets, no de CSS) — deliberadamente fuera de
  * alcance de este cambio.
  */
+
+/* 4) Filas alternadas (zebra striping) en la grilla de Vista de Reporte
+ * (frappe-datatable, usada por defecto en "Cita de Taller" y en general
+ * por cualquier DocType con default_view=Report).
+ *
+ * Confirmado en frappe-datatable.js: cada fila de datos vive dentro de
+ * `.dt-scrollable` con clase `dt-row dt-row-<id>` (el header y la fila de
+ * filtros viven en `.dt-header`, AFUERA de `.dt-scrollable`, así que este
+ * selector no los toca). Cada celda (`.dt-cell`) pinta su propio fondo
+ * con `background-color: var(--dt-cell-bg)` (frappe_datatable.scss), que
+ * taparía un color puesto solo en `.dt-row` — por eso el color se aplica
+ * directo sobre `.dt-cell` de las filas pares.
+ *
+ * Se reutiliza `var(--subtle-fg)` (el mismo token que ya usa Frappe para
+ * el fondo del header de la grilla) en vez de un hex nuevo, para que
+ * respete automáticamente el tema claro/oscuro del usuario sin tener que
+ * duplicar la regla en un media query. */
+.datatable .dt-scrollable .dt-row:nth-child(even) .dt-cell {
+	background-color: var(--subtle-fg) !important;
+}
