@@ -229,3 +229,21 @@ body {
 	border-color: #143f6d;
 }
 
+/* 8) Lienzo del Workspace y tipografia de titulos (21-sep-2026).
+ * `.editor-js-container` confirmado en workspace.js como el wrapper
+ * especifico del contenido de un Workspace (envuelve el editor de
+ * bloques Editor.js) - a diferencia de `.desk-page.page-main-content`,
+ * que es generico y tambien lo usan List View/Form, este SI es exclusivo
+ * de la vista Workspace, asi que no grisea listas ni formularios. */
+.editor-js-container {
+	background-color: #f8fafc;
+}
+
+/* `.widget-title` confirmado en desktop.scss (varios selectores, todos
+ * bajo `.widget-label`) - refinar peso y color sin heredar el azul de
+ * link por defecto que a veces toman los titulos con action. */
+.widget-group .widget-title {
+	font-weight: 600;
+	color: var(--text-color);
+}
+
