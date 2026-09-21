@@ -104,3 +104,82 @@ a.desktop-icon[data-id="Ventas y Facturacion"] .icon-container {
 .list-row-container:not(:has(.list-row-head)):nth-child(even of .list-row-container) {
 	background-color: var(--subtle-fg) !important;
 }
+
+/* 6) Rediseño "Dashboard Moderno" del Desk/Workspace (21-sep-2026).
+ * Selectores confirmados leyendo el código fuente real de esta instancia
+ * (Frappe 16.34, NO v14/v15 - la estructura cambió entre versiones, no
+ * vale reusar CSS de tutoriales viejos sin verificar):
+ *   - Navbar real: frappe/public/scss/desk/navbar.scss -> `.navbar`
+ *     (background: var(--navbar-bg)), buscador Ctrl+K: `.search-bar`.
+ *   - Tarjetas de accesos directos/KPI del Workspace: TODAS (shortcut,
+ *     number_card, chart, links, quick_list) heredan el mismo wrapper
+ *     `.widget` (frappe/public/js/frappe/widgets/base_widget.js) dentro
+ *     de un contenedor grid `.widget-group` (frappe/public/scss/desk/
+ *     desktop.scss, ya usa `grid-template-columns: repeat(auto-fill,
+ *     minmax(300px, 1fr))` - responsive de fábrica).
+ *   - `.widget` YA tiene `border-radius: var(--border-radius-lg)` y
+ *     `box-shadow: var(--shadow-base)` propios del core - estas reglas
+ *     los REFUERZAN (radio mayor, sombra propia, elevación en hover),
+ *     no parten de cero. */
+
+/* Tipografía global. Frappe no fija font-family en un único lugar
+ * centralizado para todos sus componentes, así que esto cubre el body y
+ * hereda hacia la mayoría (títulos, texto de grillas, sidebar) - algunos
+ * controles muy específicos (inputs de ciertos widgets) podrían no
+ * heredarlo si el core les fija su propia fuente explícita; no verificado
+ * al 100% para cada control individual. */
+body {
+	font-family:
+		"Plus Jakarta Sans",
+		"Inter",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		sans-serif !important;
+}
+
+/* Navbar: glassmorphism sutil. `--navbar-bg` ya es la variable que usa
+ * el core para el fondo — se sobreescribe con un semitransparente +
+ * blur, en vez de pisar la regla completa. */
+.navbar {
+	background-color: rgba(255, 255, 255, 0.72) !important;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--border-color);
+}
+:root:not([data-theme="light"]) .navbar {
+	background-color: rgba(30, 30, 30, 0.6) !important;
+}
+:root[data-theme="dark"] .navbar {
+	background-color: rgba(30, 30, 30, 0.6) !important;
+}
+
+/* Buscador Ctrl+K: bordes redondeados y fondo propio, para que no se
+ * vea como un input plano de formulario. */
+.navbar .search-bar {
+	border-radius: var(--border-radius-md);
+	background-color: var(--control-bg);
+}
+
+/* Tarjetas de Workspace (shortcuts + Number Cards + charts, todas usan
+ * `.widget`): elevación al pasar el cursor. El `transition` va en el
+ * estado base (no en :hover) para que la vuelta a la posición normal
+ * también sea animada. */
+.widget-group .widget {
+	border-radius: 12px;
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease;
+}
+.widget-group .widget:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.08));
+}
+
+/* Grid de Workspace: menos aire entre tarjetas para que no se vea tan
+ * vacío con pocos accesos (como en "Autos" o "Citas Taller" recién
+ * creados, con 1-4 shortcuts nomás). */
+.widget-group {
+	gap: var(--margin-md, 16px) !important;
+}
+
