@@ -247,3 +247,18 @@ body {
 	color: var(--text-color);
 }
 
+/* 9) Letra mas chica en las grillas (21-sep-2026), para que se vea tan
+ * densa como el grid real de GeneXus (`Citas del Taller`), no con el
+ * tamaño de fuente "base" grande que trae Frappe por defecto.
+ * `.datatable` fija su tipografia con @include get_textstyle("base",
+ * "regular") (frappe_datatable.scss) - se sobreescribe el tamaño en la
+ * raiz, y como los descendientes (`.dt-cell`) usan font-size: inherit,
+ * el cambio cae en cascada sin tocar cada celda una por una.
+ * `.list-row` cubre el mismo achique para la Vista de Lista clasica. */
+.datatable {
+	font-size: 12px !important;
+}
+.list-row-container:not(:has(.list-row-head)) .list-row {
+	font-size: 12px;
+}
+
