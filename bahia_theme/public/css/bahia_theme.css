@@ -82,3 +82,17 @@ a.desktop-icon[data-id="Ventas y Facturacion"] .icon-container {
 .datatable .dt-scrollable .dt-row:nth-child(even) .dt-cell {
 	background-color: var(--subtle-fg) !important;
 }
+
+/* 5) Mismo zebra striping, pero para la Vista de Lista clásica (la que usa
+ * "Vehiculo" y cualquier DocType sin default_view=Report). Es un
+ * componente totalmente distinto de frappe-datatable (list_view.js, no
+ * frappe-datatable.js): cada fila es un `.list-row-container` (a
+ * diferencia del `.dt-cell`, este SI puede pintarse directo, no tiene un
+ * hijo que tape el fondo con su propio color). El encabezado vive en un
+ * `.list-row-container` propio que envuelve un `.list-row-head` adentro
+ * -es decir, header y filas de datos son hermanos del mismo tipo-, por
+ * eso se excluye con `:not(:has(...))`, el mismo patron que ya usa
+ * Frappe internamente (list.scss) para lo mismo. */
+.list-row-container:not(:has(.list-row-head)):nth-of-type(even) {
+	background-color: var(--subtle-fg) !important;
+}
