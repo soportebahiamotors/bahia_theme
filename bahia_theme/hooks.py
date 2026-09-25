@@ -72,3 +72,22 @@ app_include_css = "/assets/bahia_theme/css/bahia_theme.css"
 
 # automatically load and sync documents of this doctype from downstream apps
 # importable_doctypes = [doctype_1]
+
+# Fixtures
+# --------
+# Config custom (Roles/permisos/Workspaces/Users) que vive solo en la base de
+# MariaDB del servidor y que un rebuild de imagen Docker perdería si no queda
+# declarada acá (ver incidente del 16-sep-2026: un rebuild + bench migrate
+# borro 4 Workspace/Desktop Icon custom que no estaban trackeados como fixture
+# de ninguna app). Regenerar con:
+#   bench --site frontend export-fixtures
+fixtures = [
+	# Modulos custom migrados de GeneXus (shell Workspace + sidebar + tile)
+	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
+	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
+	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
+	# Role de solo lectura para integraciones (bot.comparador@bahiamotors.com)
+	{"dt": "Role", "filters": [["name", "in", ["Comparador Solo Lectura"]]]},
+	{"dt": "Custom DocPerm", "filters": [["role", "=", "Comparador Solo Lectura"]]},
+	{"dt": "User", "filters": [["name", "in", ["bot.comparador@bahiamotors.com"]]]},
+]
