@@ -112,6 +112,21 @@ fixtures = [
 		"filters": [["standard", "=", 1], ["app", "in", ["erpnext", "frappe", "hrms"]]],
 		"prefix": "standard_hidden",
 	},
+	# Workspace estandar de erpnext/frappe/hrms puestos en is_hidden=1 a mano
+	# (2026-10-01, mismo incidente que los Desktop Icon de arriba pero en la
+	# pagina "Home" de Workspaces, que es un mecanismo de visibilidad distinto
+	# e independiente de Desktop Icon.hidden). Filtro por is_hidden=1 + app in
+	# erpnext/frappe/hrms en vez de listar los 26 nombres a mano: Workspace
+	# tiene el mismo campo "app" que Desktop Icon, y da exactamente ese set de
+	# 26 sin tocar "Home"/"Welcome Workspace" (quedan is_hidden=0, se excluyen
+	# solos) ni los 3 modulos custom (app=None). Mismo prefijo "standard_hidden"
+	# que Desktop Icon para no pisar el fixture de arriba de los 3 Workspace
+	# custom (archivo .json distinto por el prefix).
+	{
+		"dt": "Workspace",
+		"filters": [["is_hidden", "=", 1], ["app", "in", ["erpnext", "frappe", "hrms"]]],
+		"prefix": "standard_hidden",
+	},
 	# Role de solo lectura para integraciones (bot.comparador@bahiamotors.com)
 	{"dt": "Role", "filters": [["name", "in", ["Comparador Solo Lectura"]]]},
 	{"dt": "Custom DocPerm", "filters": [["role", "=", "Comparador Solo Lectura"]]},
