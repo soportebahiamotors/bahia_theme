@@ -1,0 +1,62 @@
+/* Replicación de estilo Vanilla para bahia_theme */
+
+/* 1. Fondo general y tipografía */
+body, .desk-page {
+  background-color: #f8fafc !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* 2. Barra superior (Navbar) limpia */
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #eaecf0 !important;
+  box-shadow: none !important;
+}
+
+/* 3. Menú lateral (Sidebar) estilo moderno */
+.desk-sidebar {
+  background-color: #ffffff !important;
+  border-right: 1px solid #eaecf0 !important;
+}
+
+.desk-sidebar .sidebar-item-container .sidebar-link {
+  border-radius: 8px !important;
+  margin: 2px 8px !important;
+  color: #344054 !important;
+  font-weight: 500 !important;
+}
+
+.desk-sidebar .sidebar-item-container .sidebar-link:hover,
+.desk-sidebar .sidebar-item-container .sidebar-link.active {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* 4. Tarjetas, formularios y paneles */
+.layout-main-section,
+.frappe-card,
+.widget {
+  border-radius: 12px !important;
+  border: 1px solid #eaecf0 !important;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05) !important;
+  background-color: #ffffff !important;
+}
+
+/* 5. Botones y controles de entrada */
+.btn-primary {
+  background-color: #18181b !important;
+  border-color: #18181b !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.form-control, .input-with-feedback {
+  border-radius: 8px !important;
+  border: 1px solid #d0d5dd !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus {
+  border-color: #18181b !important;
+  box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
+}

@@ -25,7 +25,10 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/bahia_theme/css/bahia_theme.css"
+app_include_css = [
+	"/assets/bahia_theme/css/bahia_theme.css",
+	"/assets/bahia_theme/css/bahia_vanilla_theme.css",
+]
 # app_include_js = "/assets/bahia_theme/js/bahia_theme.js"
 
 # include js, css files in header of web template
