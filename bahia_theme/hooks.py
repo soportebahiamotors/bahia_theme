@@ -98,6 +98,20 @@ fixtures = [
 	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
 	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
 	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller"]]]},
+	# Desktop Icon estandar de erpnext/frappe/hrms puestos en hidden=1 a mano
+	# (2026-10-01, tras el bench migrate de la instalacion de swift_theme que
+	# reseteo hidden=0 en 41 de ellos sin que nadie lo pidiera). Filtrado por
+	# standard+app en vez de listar nombres a mano para que capture el set
+	# completo (45: los 41 reseteados + los 4 que ya estaban ocultos antes:
+	# CRM/Home/ERPNext/Support) sin tener que mantener la lista si cambia.
+	# Prefijo "standard_hidden" para no pisar el archivo de arriba (mismo
+	# doctype, filtro distinto -> archivo .json distinto, ver fixtures.py:
+	# el nombre de archivo sale de dt+prefix, no hay merge entre entradas).
+	{
+		"dt": "Desktop Icon",
+		"filters": [["standard", "=", 1], ["app", "in", ["erpnext", "frappe", "hrms"]]],
+		"prefix": "standard_hidden",
+	},
 	# Role de solo lectura para integraciones (bot.comparador@bahiamotors.com)
 	{"dt": "Role", "filters": [["name", "in", ["Comparador Solo Lectura"]]]},
 	{"dt": "Custom DocPerm", "filters": [["role", "=", "Comparador Solo Lectura"]]},
