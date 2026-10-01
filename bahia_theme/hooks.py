@@ -25,10 +25,19 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = [
-	"/assets/bahia_theme/css/bahia_theme.css",
-	"/assets/bahia_theme/css/bahia_vanilla_theme.css",
-]
+# Desactivado 2026-10-01: se instaló `swift_theme` (github.com/its-alikhokher/
+# swift_theme) como orquestador principal de la parte visual del Desk
+# (navbar, sidebar, listas, reportes, kanban, formularios, modales, login).
+# Tanto bahia_theme.css como bahia_vanilla_theme.css pisaban navbar/sidebar/
+# list view/botones/tipografía con !important — competían directo con
+# swift_theme, así que se sacan de acá. Los archivos quedan en el repo
+# (public/css/) por si el usuario quiere rescatar algo puntual de marca
+# (colores de los 4 Desktop Icon sin SVG propio, zebra striping) una vez
+# que swift_theme esté configurado, pero no se inyectan más.
+# app_include_css = [
+# 	"/assets/bahia_theme/css/bahia_theme.css",
+# 	"/assets/bahia_theme/css/bahia_vanilla_theme.css",
+# ]
 # app_include_js = "/assets/bahia_theme/js/bahia_theme.js"
 
 # include js, css files in header of web template
