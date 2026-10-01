@@ -40,6 +40,11 @@ app_license = "mit"
 # ]
 # app_include_js = "/assets/bahia_theme/js/bahia_theme.js"
 
+# Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
+# swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas
+# puntuales sin tocar el codigo vendoreado de swift_theme.
+app_include_js = ["/assets/bahia_theme/js/swift_theme_race_fix.js"]
+
 # include js, css files in header of web template
 # web_include_css = "/assets/bahia_theme/css/bahia_theme.css"
 # web_include_js = "/assets/bahia_theme/js/bahia_theme.js"
