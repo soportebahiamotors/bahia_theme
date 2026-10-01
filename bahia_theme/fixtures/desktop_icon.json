@@ -1,6 +1,6 @@
 [
  {
-  "app": null,
+  "app": "bahia_theme",
   "bg_color": "gray",
   "docstatus": 0,
   "doctype": "Desktop Icon",
@@ -22,7 +22,7 @@
   "standard": 0
  },
  {
-  "app": null,
+  "app": "bahia_theme",
   "bg_color": "blue",
   "docstatus": 0,
   "doctype": "Desktop Icon",
@@ -44,7 +44,7 @@
   "standard": 0
  },
  {
-  "app": null,
+  "app": "bahia_theme",
   "bg_color": "blue",
   "docstatus": 0,
   "doctype": "Desktop Icon",
