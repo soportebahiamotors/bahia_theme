@@ -18,6 +18,61 @@
  *              por mask-image a la silueta del glyph.
  * Si --swift-primary no esta definida (swift_theme desinstalado), cae al azul
  * de marca original (#0289F7) como fallback.
+ *
+ * === Investigacion 2-oct-2026: por que el tile/header seguian en azul ===
+ * Se audito el bundle COMPLETO de swift_theme (los 15 archivos fuente
+ * detras de swift_theme.bundle.<hash>.css: swift-fonts/base/preset-base/
+ * backdrops/layout/density/desk/sidebar/home/orgchart/preset-accents/glass/
+ * scrollbar/toast/perf.css) buscando cualquier regla que pinte
+ * background-color o mask-image sobre `.icon-container`/`.header-logo` de
+ * estos 3 tiles o del header del sidebar. Resultado: NO existe ninguna regla
+ * de swift_theme que targetee nuestros ::before/::after, ni que redefina
+ * --swift-primary en un scope mas especifico que :root. Lo unico que toca
+ * selectores parecidos es swift-sidebar.css (".sidebar-item-icon",
+ * ".icon-container" DENTRO de ".sidebar-header", y ".header-logo:has(img)")
+ * - pero esos casos no aplican al DOM real de estos 3 modulos: cuando
+ * set_header_icon() (sidebar_header.js) encuentra un SVG de Desktop Icon
+ * propio, arma `header_icon = <img src=...>` SIN envolverlo en
+ * `.icon-container` (esa clase solo aparece cuando cae al fallback de letra/
+ * color de frappe.utils.desktop_icon()), y la regla de
+ * `.header-logo:has(img) { background-color: transparent !important }` solo
+ * pinta el background-color del elemento REAL .header-logo (una capa de
+ * pintado mas abajo en el z-order), no el de sus pseudo-elementos ::before/
+ * ::after (son cajas separadas, no heredan ni se ven afectadas por esa regla).
+ * No se encontro una guerra de cascada real contra una regla identificable.
+ *
+ * Causa raiz mas probable encontrada en su lugar: CACHEO, no cascada. El
+ * propio comentario de cabecera de swift_theme.bundle.scss documenta haber
+ * sufrido y resuelto esta MISMA clase de bug para si mismos ("listing the
+ * files raw in app_include_css meant every one was served from a URL that
+ * never changed, so browsers and nginx held the old copy across upgrades and
+ * a shipped fix simply did not arrive") - lo arreglaron pasando su CSS por el
+ * pipeline de bundling de Frappe (nombre con ".bundle." -> hash real via
+ * assets.json en cada build). Confirmado en el codigo real de Frappe
+ * (frappe/utils/jinja_globals.py::bundled_asset()): el hash de assets.json
+ * SOLO se aplica si el path contiene ".bundle." Y ademas NO empieza ya con
+ * "/assets" - nuestro hooks.py usa el path literal
+ * "/assets/bahia_theme/css/bahia_theme_reactive_icons.css", que cumple la
+ * segunda condicion (ya empieza con /assets) y por lo tanto NUNCA pasa por el
+ * hash, sin importar cuantas veces se edite el contenido. Esa URL jamas
+ * cambio en los commits 2bbb4ce/f7638c2 pese a que el contenido si cambio -
+ * exactamente el escenario que describe el comentario de swift_theme, y un
+ * candidato mucho mas solido que una guerra de especificidad no identificada
+ * para explicar por que el fix no se veia pese a estar bien desplegado en
+ * ambos contenedores (confirmado por md5sum identico backend/frontend).
+ * Mitigacion aplicada en hooks.py: query string de cache-busting manual
+ * (?v=N) en la entrada de app_include_css - bumpear el numero en cada edicion
+ * futura de este archivo, ya que el mecanismo de hash automatico no aplica
+ * aca (ver nota en hooks.py).
+ *
+ * Mitigacion defensiva aplicada ADEMAS en este archivo (sin certeza de que
+ * haga falta, pero de bajo riesgo): !important en background-color y
+ * mask-image de los ::before/::after, mas una capa duplicada con prefijo
+ * html[data-swift-sidebar-fill="brand"] para igualar/superar la especificidad
+ * de las reglas de swift-sidebar.css por si una version futura de swift_theme
+ * agrega una regla que si targetee estos mismos pseudo-elementos. La regla
+ * SIN prefijo (de mas abajo) sigue intacta para el escenario
+ * data-swift-sidebar-fill != "brand".
  */
 
 a.desktop-icon[data-id="Autos"] .icon-container,
@@ -52,40 +107,59 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
 a.desktop-icon[data-id="Autos"] .icon-container::before,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
 a.desktop-icon[data-id="Taller"] .icon-container::before {
-	background-color: var(--swift-primary, #0289f7);
+	background-color: var(--swift-primary, #0289f7) !important;
 }
 
 a.desktop-icon[data-id="Autos"] .icon-container::after,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
 a.desktop-icon[data-id="Taller"] .icon-container::after {
-	background-color: #fff;
+	background-color: #fff !important;
 }
 
 a.desktop-icon[data-id="Autos"] .icon-container::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg") !important;
 }
 a.desktop-icon[data-id="Autos"] .icon-container::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg") !important;
 }
 
 a.desktop-icon[data-id="Citas Taller"] .icon-container::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg") !important;
 }
 a.desktop-icon[data-id="Citas Taller"] .icon-container::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg") !important;
 }
 
 a.desktop-icon[data-id="Taller"] .icon-container::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg") !important;
 }
 a.desktop-icon[data-id="Taller"] .icon-container::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
+}
+
+/* Capa defensiva: misma pintura de arriba, pero con prefijo html[data-swift-
+ * sidebar-fill="brand"] para igualar/superar la especificidad de las reglas
+ * equivalentes de swift-sidebar.css (que usan ese mismo prefijo) por si una
+ * version futura de swift_theme agrega una regla que SI targetee estos
+ * pseudo-elementos. La version sin prefijo de arriba sigue cubriendo el
+ * escenario data-swift-sidebar-fill != "brand". No se encontro, a la fecha de
+ * este fix, ninguna regla real que la necesite - ver nota de investigacion
+ * mas arriba. */
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::after {
+	background-color: #fff !important;
 }
 
 /*
@@ -146,38 +220,53 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
-	background-color: var(--swift-primary, #0289f7);
+	background-color: var(--swift-primary, #0289f7) !important;
 }
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
-	background-color: #fff;
+	background-color: #fff !important;
 }
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg") !important;
 }
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg") !important;
 }
 
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg") !important;
 }
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg") !important;
 }
 
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg") !important;
 }
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
-	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
-	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
+}
+
+/* Capa defensiva (mismo motivo que la del tile del Desk mas arriba): refuerza
+ * la especificidad con el prefijo html[data-swift-sidebar-fill="brand"] que
+ * usan las reglas de swift-sidebar.css sobre .sidebar-header. La version sin
+ * prefijo de arriba ya cubre data-swift-sidebar-fill != "brand". */
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+	background-color: #fff !important;
 }

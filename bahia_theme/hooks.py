@@ -41,7 +41,25 @@ app_license = "mit"
 # 3 tiles via [data-id="..."] exacto, no reactiva bahia_theme.css ni
 # bahia_vanilla_theme.css (siguen deshabilitados, ver nota de arriba: esos dos
 # competian con swift_theme a lo ancho de todo el Desk).
-app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css"]
+#
+# IMPORTANTE (2-oct-2026): el path ya empieza con "/assets", asi que
+# frappe.utils.jinja_globals.bundled_asset() NUNCA lo hace pasar por
+# assets.json (ese hash automatico solo aplica a paths que contienen
+# ".bundle." Y que NO empiecen ya con "/assets" - ver el codigo fuente de esa
+# funcion). Esto significa que esta URL es literalmente la misma de por vida,
+# edites o no el CSS: swift_theme pasó por este mismo bug con su propio CSS
+# ("every one was served from a URL that never changed, so browsers and nginx
+# held the old copy across upgrades", comentario real en su
+# swift_theme.bundle.scss) y lo resolvio moviendo su CSS a un nombre
+# ".bundle." real con hash. Ac'a, en vez de migrar todo el pipeline, se usa un
+# cache-busting manual mas simple: el "?v=N" al final. BUMPEAR ESE NUMERO EN
+# CADA EDICION FUTURA de bahia_theme_reactive_icons.css - si no se bumpea, el
+# browser/Cloudflare puede seguir sirviendo una copia vieja indefinidamente
+# aunque el archivo en el servidor ya este actualizado (esto fue la causa raiz
+# mas probable de que el fix de color reactivo de iconos de Autos/Citas
+# Taller/Taller no se viera pese a estar bien desplegado en ambos
+# contenedores - ver nota de investigacion completa en el propio .css).
+app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=2"]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas
