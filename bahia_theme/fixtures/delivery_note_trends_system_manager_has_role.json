@@ -1,0 +1,12 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Has Role",
+  "modified": "2026-10-02 15:43:35.823645",
+  "name": "qle0ejajs8",
+  "parent": "Delivery Note Trends",
+  "parentfield": "roles",
+  "parenttype": "Report",
+  "role": "System Manager"
+ }
+]

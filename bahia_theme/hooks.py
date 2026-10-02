@@ -164,4 +164,16 @@ fixtures = [
 	# arriba) - sin esto, cualquier usuario sin rol de HR ve "Permiso
 	# insuficiente para Branch" al abrir la lista de Citas.
 	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Branch"], ["role", "=", "System Manager"]], "prefix": "branch_system_manager"},
+	# Acceso de System Manager al reporte estandar "Delivery Note Trends"
+	# ("Evolucion de las notas de entrega", 2026-10-02): el reporte viene
+	# restringido de fabrica a Sales User/Stock Manager/Stock User/Accounts
+	# User (su propia lista de roles en el child table "roles" del DocType
+	# Report, independiente del DocPerm de Delivery Note) - el usuario real
+	# tiene Sales Manager+System Manager, ninguno de los 4, y veia "Usted no
+	# tiene acceso al Reporte". No se puede agregar via doc.save() normal
+	# (Report.validate_standard_report() tira "Standard reports can only be
+	# created in developer mode" para cualquier reporte estandar) - se
+	# inserto el child row directo por API (sin pasar por el validate del
+	# padre), igual que un Custom DocPerm nuevo.
+	{"dt": "Has Role", "filters": [["parent", "=", "Delivery Note Trends"], ["parenttype", "=", "Report"], ["role", "=", "System Manager"]], "prefix": "delivery_note_trends_system_manager"},
 ]
