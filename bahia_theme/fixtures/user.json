@@ -4,6 +4,7 @@
   "allowed_in_mentions": 1,
   "api_key": null,
   "api_secret": null,
+  "assistant_enabled": 1,
   "banner_image": null,
   "bio": null,
   "birth_date": null,

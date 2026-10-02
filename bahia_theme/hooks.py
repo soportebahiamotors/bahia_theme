@@ -136,4 +136,11 @@ fixtures = [
 	{"dt": "Role", "filters": [["name", "in", ["Comparador Solo Lectura"]]]},
 	{"dt": "Custom DocPerm", "filters": [["role", "=", "Comparador Solo Lectura"]]},
 	{"dt": "User", "filters": [["name", "in", ["bot.comparador@bahiamotors.com"]]]},
+	# Permiso de lectura de Branch para System Manager (2026-10-02): Branch solo
+	# traia permiso estandar para HR User/HR Manager, pero Citas/Autos/Taller
+	# usan Branch como Link de Sucursal y el rol real usado para acceder a esos
+	# modulos custom es System Manager (ver permisos de Cita de Taller/Vehiculo
+	# arriba) - sin esto, cualquier usuario sin rol de HR ve "Permiso
+	# insuficiente para Branch" al abrir la lista de Citas.
+	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Branch"], ["role", "=", "System Manager"]], "prefix": "branch_system_manager"},
 ]
