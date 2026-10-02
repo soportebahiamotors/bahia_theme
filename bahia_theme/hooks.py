@@ -176,4 +176,12 @@ fixtures = [
 	# inserto el child row directo por API (sin pasar por el validate del
 	# padre), igual que un Custom DocPerm nuevo.
 	{"dt": "Has Role", "filters": [["parent", "=", "Delivery Note Trends"], ["parenttype", "=", "Report"], ["role", "=", "System Manager"]], "prefix": "delivery_note_trends_system_manager"},
+	# Permiso de lectura de Warehouse para System Manager (2026-10-02): mismo
+	# patron que Branch arriba - Warehouse solo traia permiso estandar para
+	# Accounts User/Stock User/Sales User/Item Manager/Purchase User/
+	# Manufacturing User, ninguno de los roles reales del usuario (Sales
+	# Manager+System Manager) - "Permiso insuficiente para Warehouse" al
+	# abrir cualquier pantalla que lo referencia como Link (ej. reportes de
+	# stock/notas de entrega).
+	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Warehouse"], ["role", "=", "System Manager"]], "prefix": "warehouse_system_manager"},
 ]
