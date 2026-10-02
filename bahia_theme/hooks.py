@@ -184,4 +184,8 @@ fixtures = [
 	# abrir cualquier pantalla que lo referencia como Link (ej. reportes de
 	# stock/notas de entrega).
 	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Warehouse"], ["role", "=", "System Manager"]], "prefix": "warehouse_system_manager"},
+	# Permiso de lectura de Serial No para System Manager (2026-10-02): mismo
+	# patron que Branch/Warehouse arriba (solo traia Item Manager/Stock
+	# Manager/Stock User de fabrica).
+	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Serial No"], ["role", "=", "System Manager"]], "prefix": "serial_no_system_manager"},
 ]
