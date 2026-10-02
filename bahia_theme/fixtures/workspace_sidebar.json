@@ -1005,13 +1005,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Aseguradoras",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Aseguradora",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1037,13 +1037,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Colores exteriores",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Color Exterior",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1053,13 +1053,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Colores interiores",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Color Interior",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1069,13 +1069,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Financieras",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Financiera",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1332,6 +1332,22 @@
     "show_arrow": 0,
     "type": "Link",
     "url": "#"
+   },
+   {
+    "child": 1,
+    "collapsible": 1,
+    "filters": null,
+    "icon": null,
+    "indent": 0,
+    "keep_closed": 0,
+    "label": "Vendedores",
+    "link_to": "Vendedor Auto",
+    "link_type": "DocType",
+    "navigate_to_tab": null,
+    "route_options": null,
+    "show_arrow": 0,
+    "type": "Link",
+    "url": null
    },
    {
     "child": 0,
@@ -1606,7 +1622,7 @@
     "url": "#"
    }
   ],
-  "modified": "2026-09-23 09:29:14.933971",
+  "modified": "2026-10-02 16:46:09.290676",
   "module": "Autos",
   "module_onboarding": null,
   "name": "Autos",
