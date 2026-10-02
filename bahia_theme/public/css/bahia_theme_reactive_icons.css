@@ -1,0 +1,89 @@
+/*
+ * Iconos de Autos/Citas Taller/Taller reaccionando al color activo de
+ * swift_theme (--swift-primary), en vez de un color fijo horneado en el PNG/
+ * SVG. Acotado EXPLICITAMENTE a estos 3 tiles via [data-id="..."] exacto -
+ * nunca toca ningun otro selector del Desk, para no repetir el incidente del
+ * patch de frappe.call que rompio el sitio entero por ser demasiado amplio.
+ *
+ * Tecnica: el <img class="app-icon"> original (con su color horneado) se
+ * oculta visualmente (visibility:hidden, conserva el espacio/tamaño real del
+ * layout - no se toca el HTML/JS de desktop_icon.html para no arriesgar otra
+ * rotura sitewide). Dos pseudo-elementos ::before/::after, del mismo tamaño
+ * que .icon-container (inset:0, hereda el tamaño real sin asumir un px fijo
+ * que no pude confirmar en el CSS core), pintan:
+ *   ::before = fondo (cuadrado redondeado [+ circulo insignia en Citas
+ *              Taller]) con background-color: var(--swift-primary), recortado
+ *              por mask-image a la silueta del fondo.
+ *   ::after  = glyph (auto/calendario+llave/llave) en blanco fijo, recortado
+ *              por mask-image a la silueta del glyph.
+ * Si --swift-primary no esta definida (swift_theme desinstalado), cae al azul
+ * de marca original (#0289F7) como fallback.
+ */
+
+a.desktop-icon[data-id="Autos"] .icon-container,
+a.desktop-icon[data-id="Citas Taller"] .icon-container,
+a.desktop-icon[data-id="Taller"] .icon-container {
+	position: relative;
+}
+
+a.desktop-icon[data-id="Autos"] .icon-container .app-icon,
+a.desktop-icon[data-id="Citas Taller"] .icon-container .app-icon,
+a.desktop-icon[data-id="Taller"] .icon-container .app-icon {
+	visibility: hidden;
+}
+
+a.desktop-icon[data-id="Autos"] .icon-container::before,
+a.desktop-icon[data-id="Autos"] .icon-container::after,
+a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
+a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
+a.desktop-icon[data-id="Taller"] .icon-container::before,
+a.desktop-icon[data-id="Taller"] .icon-container::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+a.desktop-icon[data-id="Autos"] .icon-container::before,
+a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
+a.desktop-icon[data-id="Taller"] .icon-container::before {
+	background-color: var(--swift-primary, #0289f7);
+}
+
+a.desktop-icon[data-id="Autos"] .icon-container::after,
+a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
+a.desktop-icon[data-id="Taller"] .icon-container::after {
+	background-color: #fff;
+}
+
+a.desktop-icon[data-id="Autos"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+}
+a.desktop-icon[data-id="Autos"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+}
+
+a.desktop-icon[data-id="Citas Taller"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+}
+a.desktop-icon[data-id="Citas Taller"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+}
+
+a.desktop-icon[data-id="Taller"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+}
+a.desktop-icon[data-id="Taller"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+}

@@ -34,11 +34,14 @@ app_license = "mit"
 # (public/css/) por si el usuario quiere rescatar algo puntual de marca
 # (colores de los 4 Desktop Icon sin SVG propio, zebra striping) una vez
 # que swift_theme esté configurado, pero no se inyectan más.
-# app_include_css = [
-# 	"/assets/bahia_theme/css/bahia_theme.css",
-# 	"/assets/bahia_theme/css/bahia_vanilla_theme.css",
-# ]
 # app_include_js = "/assets/bahia_theme/js/bahia_theme.js"
+
+# Iconos de Autos/Citas Taller/Taller reaccionando al --swift-primary activo
+# (ver bahia_theme_reactive_icons.css para el detalle) - acotado solo a esos
+# 3 tiles via [data-id="..."] exacto, no reactiva bahia_theme.css ni
+# bahia_vanilla_theme.css (siguen deshabilitados, ver nota de arriba: esos dos
+# competian con swift_theme a lo ancho de todo el Desk).
+app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css"]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas
