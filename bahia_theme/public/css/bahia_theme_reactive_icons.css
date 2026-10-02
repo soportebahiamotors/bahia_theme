@@ -87,3 +87,97 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
 	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
 	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
 }
+
+/*
+ * === Icono de cabecera del sidebar izquierdo (al entrar a Autos/Citas
+ * Taller/Taller, arriba de "Buscar", al lado del titulo del modulo) ===
+ *
+ * Es un componente DISTINTO del tile del Desk de arriba (frappe.ui.SidebarHeader
+ * en apps/frappe/frappe/public/js/frappe/ui/sidebar/sidebar_header.js), pero
+ * tiene el MISMO bug de fondo: set_header_icon() busca el icono con
+ * frappe.utils.get_desktop_icon(label, "solid") - el MISMISIMO archivo
+ * solid/<slug>.svg que ya usa el tile del Desk, con el azul #0289F7 horneado
+ * adentro del SVG (no una variable de color). No hay glyph "generico" roto -
+ * es literalmente nuestro propio SVG de marca, pero renderizado a ~24-32px
+ * (frappe/public/scss/desk/sidebar_header.scss: .header-logo es 32x32), donde
+ * el detalle fino (circulo insignia + wrench de Citas Taller) se pierde y
+ * queda ilegible/generico a simple vista.
+ *
+ * sidebar.js (frappe.ui.Sidebar.setup()) ya deja data-title="<titulo>" en
+ * .body-sidebar antes de instanciar el header (misma string que el label del
+ * Desktop Icon: "Autos"/"Citas Taller"/"Taller") - eso permite acotar el fix
+ * por atributo exacto sin tocar ningun otro modulo/Workspace del sitio, igual
+ * de estricto que el [data-id="..."] de arriba. Mismisima tecnica de
+ * mask-image que el tile del Desk, y se REUSAN los mismos 6 SVG de mask/ ya
+ * desplegados (ningun archivo nuevo): solo cambia el contenedor real
+ * (.header-logo, 32x32) en vez de .icon-container del tile, el resto es
+ * identico (fondo con var(--swift-primary) + glyph blanco por encima).
+ */
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo {
+	position: relative;
+}
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo img {
+	visibility: hidden;
+}
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
+	background-color: var(--swift-primary, #0289f7);
+}
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+	background-color: #fff;
+}
+
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_bg.svg");
+}
+.body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/autos_glyph.svg");
+}
+
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_bg.svg");
+}
+.body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/citas_taller_glyph.svg");
+}
+
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_bg.svg");
+}
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg");
+}
