@@ -18,9 +18,20 @@
 	var _origCall = frappe.call.bind(frappe);
 	var _queue = Promise.resolve();
 
-	function patchedCall(opts) {
-		if (!opts || opts.method !== TARGET_METHOD) {
-			return _origCall(opts);
+	// frappe.call tiene 2 formas de uso: frappe.call({method, args, ...}) y
+	// frappe.call("metodo", argsObj) (2 argumentos separados, usada por varios
+	// lugares del core, ej. base_list.js::get_list_view_settings). La primera
+	// version de este fix solo reenviaba el primer argumento en el camino de
+	// passthrough, perdiendo el 2do argumento en la forma de 2 parametros -
+	// rompiendo CUALQUIER llamada de esa forma en todo el sitio (confirmado:
+	// get_list_settings quedaba sin 'doctype' en TODAS las listas, no solo en
+	// el caso que este fix queria arreglar). Ahora se reciben todos los
+	// argumentos con rest params y se reenvian completos en el passthrough.
+	function patchedCall() {
+		var args = Array.prototype.slice.call(arguments);
+		var opts = args[0];
+		if (!opts || typeof opts !== "object" || opts.method !== TARGET_METHOD) {
+			return _origCall.apply(null, args);
 		}
 
 		return new Promise(function (resolve) {
