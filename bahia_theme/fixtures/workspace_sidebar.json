@@ -461,13 +461,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Mant. Claves de Vehículos",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Clave de Vehiculo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1622,7 +1622,7 @@
     "url": "#"
    }
   ],
-  "modified": "2026-10-03 10:34:17.562548",
+  "modified": "2026-10-03 10:40:51.608527",
   "module": "Autos",
   "module_onboarding": null,
   "name": "Autos",
