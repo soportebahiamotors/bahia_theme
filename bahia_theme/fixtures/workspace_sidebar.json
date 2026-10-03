@@ -829,13 +829,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Marcas",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Marca de Vehiculo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1622,7 +1622,7 @@
     "url": "#"
    }
   ],
-  "modified": "2026-10-03 09:50:19.362172",
+  "modified": "2026-10-03 10:34:17.562548",
   "module": "Autos",
   "module_onboarding": null,
   "name": "Autos",
