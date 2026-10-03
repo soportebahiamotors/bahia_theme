@@ -861,13 +861,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Ferias",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Feria",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -877,13 +877,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Fechas de ferias",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Fecha de Feria",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -893,13 +893,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Grupos autos",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Grupo Auto",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -909,13 +909,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Instaladores",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Instalador",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -925,13 +925,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Tipos de papel",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Tipo de Papel Auto",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -941,13 +941,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Bancos",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Banco Auto",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -957,13 +957,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Especificaciones",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Especificacion Auto",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -973,13 +973,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Leyendas",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Leyenda",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -989,13 +989,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Accesorios",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Accesorio",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1021,13 +1021,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Usuarios-Sucursales",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Usuario Sucursal",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1085,13 +1085,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Tipos de transmisión",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Tipo de Transmision",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1101,13 +1101,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Ubicaciones",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Ubicacion de Vehiculo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1117,13 +1117,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Versiones",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Version de Vehiculo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1133,13 +1133,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Puertos",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Puerto",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1149,13 +1149,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Orígenes",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Origen de Vehiculo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1622,7 +1622,7 @@
     "url": "#"
    }
   ],
-  "modified": "2026-10-02 16:46:09.290676",
+  "modified": "2026-10-03 09:50:19.362172",
   "module": "Autos",
   "module_onboarding": null,
   "name": "Autos",
