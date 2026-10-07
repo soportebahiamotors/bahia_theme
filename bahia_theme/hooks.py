@@ -59,7 +59,14 @@ app_license = "mit"
 # mas probable de que el fix de color reactivo de iconos de Autos/Citas
 # Taller/Taller no se viera pese a estar bien desplegado en ambos
 # contenedores - ver nota de investigacion completa en el propio .css).
-app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=2"]
+#
+# v=3 (7-oct-2026): se agregaron las reglas de "Selling"/"ERPNext Settings"
+# (2 iconos ESTANDAR de erpnext recien reactivados, ver fixture
+# standard_hidden_desktop_icon.json) - mismo bump de cache-busting manual que
+# ya hizo falta antes, por el mismo motivo documentado arriba (el path ya
+# empieza con "/assets" asi que nunca pasa por el hash automatico de
+# assets.json).
+app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=3"]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas

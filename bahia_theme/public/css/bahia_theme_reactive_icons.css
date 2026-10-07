@@ -270,3 +270,159 @@ html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
+
+/*
+ * === Extension 7-oct-2026: mismo diseno para 2 iconos ESTANDAR de ERPNext
+ * (Desktop Icon.name="Selling" / "ERPNext Settings", recien reactivados via
+ * el fixture standard_hidden_desktop_icon.json) ===
+ *
+ * Confirmado antes de escribir esto (ver tabDesktop Icon/tabWorkspace/
+ * tabWorkspace Sidebar en la base): el campo real `name`/`label`/`title` de
+ * estos 2 registros standard es el string EN INGLES "Selling"/
+ * "ERPNext Settings" (no la traduccion visible "Ventas"/"Configuracion" -
+ * esa traduccion ocurre solo en el render via __(), nunca se persiste en el
+ * dato). desktop_icon.html arma data-id="{{ icon.label }}" con el label crudo
+ * sin traducir, y sidebar.js arma data-title="{{ workspace_title }}" igual de
+ * crudo - por eso los selectores de abajo usan "Selling"/"ERPNext Settings"
+ * en ingles, igual que haria falta si el Desk estuviera en cualquier otro
+ * idioma.
+ *
+ * A diferencia de Autos/Citas Taller/Taller (SVG de marca propia hechos a
+ * mano con glyphs de FontAwesome reescalados), estos 2 SVG reales de ERPNext
+ * (apps/erpnext/erpnext/public/icons/desktop_icons/solid/selling.svg y
+ * erpnext_settings.svg) ya son el mismo formato de 2 capas limpias que usa
+ * nuestra tecnica: un <path> de fondo (cuadrado redondeado, mismisimo "d"
+ * exacto que taller_bg.svg/autos_bg.svg/citas_taller_bg.svg - los 4 iconos
+ * standard comparten el mismo squircle 54x54) con fill="#0289F7" horneado, y
+ * un segundo <path> de glyph en fill="white" ya posicionado en el mismo
+ * sistema de coordenadas 0-54 (sin necesidad de transform/scale como si hizo
+ * falta con los glyphs de FontAwesome en viewBox 512). Separacion limpia:
+ * selling_bg.svg/erpnext_settings_bg.svg = el path del cuadrado tal cual (fill
+ * recoloreado a #000, el color no importa para una mask-image basada en
+ * alpha, solo la silueta); selling_glyph.svg/erpnext_settings_glyph.svg = el
+ * path blanco original tal cual, sin ningun recorte a mano.
+ */
+
+a.desktop-icon[data-id="Selling"] .icon-container,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container {
+	position: relative;
+}
+
+a.desktop-icon[data-id="Selling"] .icon-container .app-icon,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container .app-icon {
+	visibility: hidden;
+}
+
+a.desktop-icon[data-id="Selling"] .icon-container::before,
+a.desktop-icon[data-id="Selling"] .icon-container::after,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::before,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+a.desktop-icon[data-id="Selling"] .icon-container::before,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+
+a.desktop-icon[data-id="Selling"] .icon-container::after,
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::after {
+	background-color: #fff !important;
+}
+
+a.desktop-icon[data-id="Selling"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_bg.svg") !important;
+}
+a.desktop-icon[data-id="Selling"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_glyph.svg") !important;
+}
+
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_bg.svg") !important;
+}
+a.desktop-icon[data-id="ERPNext Settings"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_glyph.svg") !important;
+}
+
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Selling"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="ERPNext Settings"] .icon-container::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Selling"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="ERPNext Settings"] .icon-container::after {
+	background-color: #fff !important;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo {
+	position: relative;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo img {
+	visibility: hidden;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::after {
+	background-color: #fff !important;
+}
+
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_bg.svg") !important;
+}
+.body-sidebar[data-title="Selling"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/selling_glyph.svg") !important;
+}
+
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_bg.svg") !important;
+}
+.body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/erpnext_settings_glyph.svg") !important;
+}
+
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Selling"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::before {
+	background-color: var(--swift-primary, #0289f7) !important;
+}
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Selling"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::after {
+	background-color: #fff !important;
+}
