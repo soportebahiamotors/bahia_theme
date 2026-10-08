@@ -78,7 +78,15 @@ app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=4"]
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas
 # puntuales sin tocar el codigo vendoreado de swift_theme.
-app_include_js = ["/assets/bahia_theme/js/swift_theme_race_fix.js"]
+#
+# Fix del redirect de sidebar a "Clientes" al refrescar sobre un DocType
+# compartido entre modulos (ver bahia_theme_sidebar_module_fix.js para el
+# detalle completo de la causa raiz real, confirmada 8-oct-2026 leyendo
+# frappe/public/js/frappe/ui/sidebar/sidebar.js + boot.py::get_sidebar_items()).
+app_include_js = [
+	"/assets/bahia_theme/js/swift_theme_race_fix.js",
+	"/assets/bahia_theme/js/bahia_theme_sidebar_module_fix.js",
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/bahia_theme/css/bahia_theme.css"
