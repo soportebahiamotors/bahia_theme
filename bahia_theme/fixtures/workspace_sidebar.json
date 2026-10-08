@@ -845,13 +845,13 @@
     "indent": 0,
     "keep_closed": 0,
     "label": "Modelos",
-    "link_to": null,
-    "link_type": "URL",
+    "link_to": "Modelo",
+    "link_type": "DocType",
     "navigate_to_tab": null,
     "route_options": null,
     "show_arrow": 0,
     "type": "Link",
-    "url": "#"
+    "url": null
    },
    {
     "child": 1,
@@ -1350,6 +1350,38 @@
     "url": null
    },
    {
+    "child": 1,
+    "collapsible": 1,
+    "filters": null,
+    "icon": null,
+    "indent": 0,
+    "keep_closed": 0,
+    "label": "Datos aux. vendedores",
+    "link_to": null,
+    "link_type": "URL",
+    "navigate_to_tab": null,
+    "route_options": null,
+    "show_arrow": 0,
+    "type": "Link",
+    "url": "#"
+   },
+   {
+    "child": 1,
+    "collapsible": 1,
+    "filters": null,
+    "icon": null,
+    "indent": 0,
+    "keep_closed": 0,
+    "label": "Paises",
+    "link_to": "Pais",
+    "link_type": "DocType",
+    "navigate_to_tab": null,
+    "route_options": null,
+    "show_arrow": 0,
+    "type": "Link",
+    "url": null
+   },
+   {
     "child": 0,
     "collapsible": 1,
     "filters": null,
@@ -1622,7 +1654,7 @@
     "url": "#"
    }
   ],
-  "modified": "2026-10-03 12:27:41.477247",
+  "modified": "2026-10-08 11:29:09.855606",
   "module": "Autos",
   "module_onboarding": null,
   "name": "Autos",
