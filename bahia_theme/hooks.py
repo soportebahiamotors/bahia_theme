@@ -66,7 +66,14 @@ app_license = "mit"
 # ya hizo falta antes, por el mismo motivo documentado arriba (el path ya
 # empieza con "/assets" asi que nunca pasa por el hash automatico de
 # assets.json).
-app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=3"]
+#
+# v=4 (8-oct-2026): se agregaron las reglas de "Clientes" (icon=users) y
+# "Proveedores" (icon=truck), 2 modulos custom nuevos - glyphs recortados a
+# mano desde el sprite Lucide de frappe (ver nota de extension 8-oct-2026 en
+# el propio .css para el detalle de por que Lucide necesito recorte manual
+# igual que Autos/Citas Taller/Taller, a diferencia de Selling/ERPNext
+# Settings). Mismo bump de cache-busting manual, mismo motivo.
+app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=4"]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas

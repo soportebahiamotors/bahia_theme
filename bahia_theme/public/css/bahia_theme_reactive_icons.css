@@ -77,13 +77,17 @@
 
 a.desktop-icon[data-id="Autos"] .icon-container,
 a.desktop-icon[data-id="Citas Taller"] .icon-container,
-a.desktop-icon[data-id="Taller"] .icon-container {
+a.desktop-icon[data-id="Taller"] .icon-container,
+a.desktop-icon[data-id="Clientes"] .icon-container,
+a.desktop-icon[data-id="Proveedores"] .icon-container {
 	position: relative;
 }
 
 a.desktop-icon[data-id="Autos"] .icon-container .app-icon,
 a.desktop-icon[data-id="Citas Taller"] .icon-container .app-icon,
-a.desktop-icon[data-id="Taller"] .icon-container .app-icon {
+a.desktop-icon[data-id="Taller"] .icon-container .app-icon,
+a.desktop-icon[data-id="Clientes"] .icon-container .app-icon,
+a.desktop-icon[data-id="Proveedores"] .icon-container .app-icon {
 	visibility: hidden;
 }
 
@@ -92,7 +96,11 @@ a.desktop-icon[data-id="Autos"] .icon-container::after,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
 a.desktop-icon[data-id="Taller"] .icon-container::before,
-a.desktop-icon[data-id="Taller"] .icon-container::after {
+a.desktop-icon[data-id="Taller"] .icon-container::after,
+a.desktop-icon[data-id="Clientes"] .icon-container::before,
+a.desktop-icon[data-id="Clientes"] .icon-container::after,
+a.desktop-icon[data-id="Proveedores"] .icon-container::before,
+a.desktop-icon[data-id="Proveedores"] .icon-container::after {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -106,13 +114,17 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
 
 a.desktop-icon[data-id="Autos"] .icon-container::before,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
-a.desktop-icon[data-id="Taller"] .icon-container::before {
+a.desktop-icon[data-id="Taller"] .icon-container::before,
+a.desktop-icon[data-id="Clientes"] .icon-container::before,
+a.desktop-icon[data-id="Proveedores"] .icon-container::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 
 a.desktop-icon[data-id="Autos"] .icon-container::after,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
-a.desktop-icon[data-id="Taller"] .icon-container::after {
+a.desktop-icon[data-id="Taller"] .icon-container::after,
+a.desktop-icon[data-id="Clientes"] .icon-container::after,
+a.desktop-icon[data-id="Proveedores"] .icon-container::after {
 	background-color: #fff !important;
 }
 
@@ -143,6 +155,24 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
 	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
 }
 
+a.desktop-icon[data-id="Clientes"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_bg.svg") !important;
+}
+a.desktop-icon[data-id="Clientes"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_glyph.svg") !important;
+}
+
+a.desktop-icon[data-id="Proveedores"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_bg.svg") !important;
+}
+a.desktop-icon[data-id="Proveedores"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
+}
+
 /* Capa defensiva: misma pintura de arriba, pero con prefijo html[data-swift-
  * sidebar-fill="brand"] para igualar/superar la especificidad de las reglas
  * equivalentes de swift-sidebar.css (que usan ese mismo prefijo) por si una
@@ -153,12 +183,16 @@ a.desktop-icon[data-id="Taller"] .icon-container::after {
  * mas arriba. */
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-container::before,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
-html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::before {
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Clientes"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-container::after,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
-html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::after {
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Clientes"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::after {
 	background-color: #fff !important;
 }
 
@@ -190,13 +224,17 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-con
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo,
-.body-sidebar[data-title="Taller"] .sidebar-header .header-logo {
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo {
 	position: relative;
 }
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo img,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo img,
-.body-sidebar[data-title="Taller"] .sidebar-header .header-logo img {
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo img {
 	visibility: hidden;
 }
 
@@ -205,7 +243,11 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-con
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
-.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -219,13 +261,17 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-con
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
-.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 
 .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
-.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+.body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
 
@@ -256,18 +302,40 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-con
 	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/taller_glyph.svg") !important;
 }
 
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_bg.svg") !important;
+}
+.body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/clientes_glyph.svg") !important;
+}
+
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_bg.svg") !important;
+}
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
+}
+
 /* Capa defensiva (mismo motivo que la del tile del Desk mas arriba): refuerza
  * la especificidad con el prefijo html[data-swift-sidebar-fill="brand"] que
  * usan las reglas de swift-sidebar.css sobre .sidebar-header. La version sin
  * prefijo de arriba ya cubre data-swift-sidebar-fill != "brand". */
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::before,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
-html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before {
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
-html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after {
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
 
@@ -426,3 +494,46 @@ html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Selling"] .sideb
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="ERPNext Settings"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
+
+/*
+ * === Extension 8-oct-2026: "Clientes" (Desktop Icon.icon="users") y
+ * "Proveedores" (Desktop Icon.icon="truck") sumados al mismo tratamiento ===
+ *
+ * A diferencia de Selling/ERPNext Settings (SVG reales de erpnext ya en
+ * formato bg+glyph de 2 capas limpias, fill solido, viewBox 0-54), y a
+ * diferencia de Autos/Citas Taller/Taller (glyphs de FontAwesome solid,
+ * viewBox ~512, reescalados a mano), estos 2 iconos salen del sprite Lucide
+ * de frappe (frappe/public/icons/lucide.svg, ids "icon-users"/"icon-truck") -
+ * confirmado que Lucide NO trae un formato bg+glyph reutilizable: son simbolos
+ * de 1 sola capa, viewBox 0 0 24 24, trazos (stroke) sin fill horneado (el
+ * color real lo pone el CSS consumidor via currentColor, no el symbol en si).
+ * Por lo tanto requirieron el mismo recorte manual que Autos/Citas Taller/
+ * Taller, aunque con una tecnica distinta porque la fuente es de trazo y no
+ * de relleno:
+ *   - clientes_bg.svg / proveedores_bg.svg: el MISMO squircle 54x54 (mismisimo
+ *     "d") que ya usan autos_bg.svg/citas_taller_bg.svg/taller_bg.svg/
+ *     selling_bg.svg/erpnext_settings_bg.svg - los 5 iconos custom+standard ya
+ *     desplegados comparten un unico fondo, no hace falta variarlo.
+ *   - clientes_glyph.svg / proveedores_glyph.svg: el/los <path>/<circle> del
+ *     symbol de Lucide correspondiente, copiados tal cual (mismisimo "d" del
+ *     sprite, sin editar geometria), envueltos en un <g
+ *     transform="translate(12,12) scale(1.25)" fill="none" stroke="#000"
+ *     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> - el
+ *     unico recorte real fue agregar esos atributos de trazo (ausentes en el
+ *     symbol crudo, de lo contrario no rendering visible = mask vacia) y
+ *     centrar el viewBox 24x24 dentro del lienzo 54x54 (scale 1.25 = 30/24,
+ *     translate 12 = (54-30)/2, deja un margen de 12u a cada lado, proporcion
+ *     similar al ~55-63% de ocupacion que ya usan los glyphs de FontAwesome
+ *     de Autos/Taller). Verificado visualmente antes de desplegar: renderizado
+ *     con cairosvg a PNG (bg recoloreado a #0289F7 + glyph blanco superpuesto,
+ *     simulando el resultado real de mask-image) - ambos glyphs quedan
+ *     centrados y legibles, mismo peso visual que el resto del set.
+ *
+ * Las reglas de selector para "Clientes"/"Proveedores" NO se repiten aca
+ * abajo: a diferencia de la extension de Selling/ERPNext Settings (que se
+ * agrego como bloque separado al final del archivo), esta extension se
+ * integro DIRECTO en los bloques combinados de arriba (tile del Desk +
+ * capa defensiva + header del sidebar de Autos/Citas Taller/Taller), para
+ * no duplicar el mismo selector `.icon-container`/`.header-logo` dos veces
+ * en el archivo.
+ */
