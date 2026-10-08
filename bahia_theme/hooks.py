@@ -128,9 +128,9 @@ app_include_js = ["/assets/bahia_theme/js/swift_theme_race_fix.js"]
 #   bench --site frontend export-fixtures
 fixtures = [
 	# Modulos custom migrados de GeneXus (shell Workspace + sidebar + tile)
-	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes"]]]},
-	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes"]]]},
-	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes"]]]},
+	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
+	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
+	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
 	# Desktop Icon estandar de erpnext/frappe/hrms puestos en hidden=1 a mano
 	# (2026-10-01, tras el bench migrate de la instalacion de swift_theme que
 	# reseteo hidden=0 en 41 de ellos sin que nadie lo pidiera). Filtrado por
