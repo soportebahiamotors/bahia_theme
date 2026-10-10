@@ -73,7 +73,17 @@ app_license = "mit"
 # el propio .css para el detalle de por que Lucide necesito recorte manual
 # igual que Autos/Citas Taller/Taller, a diferencia de Selling/ERPNext
 # Settings). Mismo bump de cache-busting manual, mismo motivo.
-app_include_css = ["/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=4"]
+#
+# bahia_theme_datatable_header_fix.css (10-oct-2026): override puntual de 1
+# regla de swift_theme (header de grilla/Vista de Reporte con fondo blanco en
+# columnas que solo se ven al hacer scroll horizontal - ver el propio .css
+# para el detalle completo de la causa). Archivo separado del de iconos
+# (preocupaciones distintas), mismo mecanismo de cache-busting manual "?v=N"
+# (ver nota de arriba de por que no sirve el hash automatico de assets.json).
+app_include_css = [
+	"/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=4",
+	"/assets/bahia_theme/css/bahia_theme_datatable_header_fix.css?v=1",
+]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
 # swift_theme_race_fix.js para el detalle completo). Serializa esas llamadas

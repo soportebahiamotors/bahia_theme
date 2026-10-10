@@ -1,0 +1,46 @@
+/* Fix: header de la grilla (frappe-datatable, Vista de Reporte) se ve con
+ * fondo BLANCO en las columnas que solo quedan visibles al hacer scroll
+ * horizontal, mientras las primeras columnas (visibles sin scrollear) sí
+ * muestran el degradé jade de `swift_theme` (10-oct-2026, reportado sobre
+ * "Cita de Taller" con columnas Sobrecupo/Responsable/Email/Servicio en
+ * blanco vs. Confirmacion/Cliente/Placa/etc en verde).
+ *
+ * Causa raíz confirmada leyendo el código real (NO corregido en swift_theme
+ * mismo a propósito - es una app de terceros, un rebuild/update futuro
+ * pisaría cualquier edit ahí):
+ *
+ * `apps/swift_theme/swift_theme/public/css/swift-desk.css` pinta el degradé
+ * sobre el CONTENEDOR completo del header:
+ *   html[data-swift-themed] .dt-header, .dt-row-header {
+ *     background: linear-gradient(100deg, var(--swift-primary), ...) !important;
+ *   }
+ *   html[data-swift-themed] .dt-header .dt-cell, ... {
+ *     background: transparent !important;  <- cada celda queda transparente,
+ *                                              dejando ver el fondo del padre
+ *   }
+ *
+ * `frappe-datatable` (apps/frappe/node_modules/frappe-datatable/dist/
+ * frappe-datatable.js) NO tiene ninguna regla de ancho propia sobre
+ * `.dt-header` - su ancho real es el del viewport visible, no el ancho total
+ * de todas las columnas. El scroll horizontal de la grilla se hace moviendo
+ * TODO el `.dt-header` con `transform: translateX(...)` (función
+ * `bindScrollHeader()`), no ensanchándolo. Resultado: el degradé "viaja"
+ * pegado solo a las columnas que estaban en pantalla al cargar - las
+ * columnas que solo se ven al desplazar la grilla a la derecha quedan fuera
+ * del área pintada por el padre y, como swift_theme dejó cada celda
+ * transparente, se ve el blanco de respaldo (no hay fondo propio en la
+ * celda).
+ *
+ * Fix: en vez de depender del contenedor, pintar el degradé POR CELDA
+ * (selector con 3 clases, más específico que el `.dt-header .dt-cell` de
+ * swift_theme que tiene 2 - gana la cascada sin necesitar !important extra,
+ * aunque se deja igual por seguridad/consistencia con el resto de reglas de
+ * override de este archivo). Cada `.dt-cell--header` ya viaja con su propia
+ * fila/columna real (no con el contenedor), así que el degradé queda fijo
+ * sobre cada columna sin importar el scroll. */
+html[data-swift-themed] .dt-header .dt-cell.dt-cell--header,
+html[data-swift-themed] .dt-row-header .dt-cell.dt-cell--header {
+	background: linear-gradient(100deg,
+		var(--swift-primary, var(--swift-accent)),
+		var(--swift-secondary, var(--swift-accent-hover))) !important;
+}
