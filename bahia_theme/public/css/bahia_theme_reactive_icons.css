@@ -79,7 +79,8 @@ a.desktop-icon[data-id="Autos"] .icon-container,
 a.desktop-icon[data-id="Citas Taller"] .icon-container,
 a.desktop-icon[data-id="Taller"] .icon-container,
 a.desktop-icon[data-id="Clientes"] .icon-container,
-a.desktop-icon[data-id="Proveedores"] .icon-container {
+a.desktop-icon[data-id="Proveedores"] .icon-container,
+a.desktop-icon[data-id="Requisiciones"] .icon-container {
 	position: relative;
 }
 
@@ -87,7 +88,8 @@ a.desktop-icon[data-id="Autos"] .icon-container .app-icon,
 a.desktop-icon[data-id="Citas Taller"] .icon-container .app-icon,
 a.desktop-icon[data-id="Taller"] .icon-container .app-icon,
 a.desktop-icon[data-id="Clientes"] .icon-container .app-icon,
-a.desktop-icon[data-id="Proveedores"] .icon-container .app-icon {
+a.desktop-icon[data-id="Proveedores"] .icon-container .app-icon,
+a.desktop-icon[data-id="Requisiciones"] .icon-container .app-icon {
 	visibility: hidden;
 }
 
@@ -100,7 +102,9 @@ a.desktop-icon[data-id="Taller"] .icon-container::after,
 a.desktop-icon[data-id="Clientes"] .icon-container::before,
 a.desktop-icon[data-id="Clientes"] .icon-container::after,
 a.desktop-icon[data-id="Proveedores"] .icon-container::before,
-a.desktop-icon[data-id="Proveedores"] .icon-container::after {
+a.desktop-icon[data-id="Proveedores"] .icon-container::after,
+a.desktop-icon[data-id="Requisiciones"] .icon-container::before,
+a.desktop-icon[data-id="Requisiciones"] .icon-container::after {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -116,7 +120,8 @@ a.desktop-icon[data-id="Autos"] .icon-container::before,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
 a.desktop-icon[data-id="Taller"] .icon-container::before,
 a.desktop-icon[data-id="Clientes"] .icon-container::before,
-a.desktop-icon[data-id="Proveedores"] .icon-container::before {
+a.desktop-icon[data-id="Proveedores"] .icon-container::before,
+a.desktop-icon[data-id="Requisiciones"] .icon-container::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 
@@ -124,7 +129,8 @@ a.desktop-icon[data-id="Autos"] .icon-container::after,
 a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
 a.desktop-icon[data-id="Taller"] .icon-container::after,
 a.desktop-icon[data-id="Clientes"] .icon-container::after,
-a.desktop-icon[data-id="Proveedores"] .icon-container::after {
+a.desktop-icon[data-id="Proveedores"] .icon-container::after,
+a.desktop-icon[data-id="Requisiciones"] .icon-container::after {
 	background-color: #fff !important;
 }
 
@@ -173,6 +179,15 @@ a.desktop-icon[data-id="Proveedores"] .icon-container::after {
 	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
 }
 
+a.desktop-icon[data-id="Requisiciones"] .icon-container::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_bg.svg") !important;
+}
+a.desktop-icon[data-id="Requisiciones"] .icon-container::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_glyph.svg") !important;
+}
+
 /* Capa defensiva: misma pintura de arriba, pero con prefijo html[data-swift-
  * sidebar-fill="brand"] para igualar/superar la especificidad de las reglas
  * equivalentes de swift-sidebar.css (que usan ese mismo prefijo) por si una
@@ -185,14 +200,16 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-cont
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::before,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::before,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Clientes"] .icon-container::before,
-html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::before {
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::before,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Requisiciones"] .icon-container::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Autos"] .icon-container::after,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Citas Taller"] .icon-container::after,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Taller"] .icon-container::after,
 html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Clientes"] .icon-container::after,
-html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::after {
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .icon-container::after,
+html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Requisiciones"] .icon-container::after {
 	background-color: #fff !important;
 }
 
@@ -226,7 +243,8 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo,
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo,
-.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo {
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo {
 	position: relative;
 }
 
@@ -234,7 +252,8 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo img,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo img,
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo img,
-.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo img {
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo img,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo img {
 	visibility: hidden;
 }
 
@@ -247,7 +266,9 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before,
-.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::after {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -263,7 +284,8 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
-.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before {
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 
@@ -271,7 +293,8 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after,
 .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
-.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
+.body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after,
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
 
@@ -320,6 +343,15 @@ html[data-swift-sidebar-fill="brand"] a.desktop-icon[data-id="Proveedores"] .ico
 	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/proveedores_glyph.svg") !important;
 }
 
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::before {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_bg.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_bg.svg") !important;
+}
+.body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::after {
+	-webkit-mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_glyph.svg") !important;
+	mask-image: url("/assets/bahia_theme/icons/desktop_icons/mask/requisiciones_glyph.svg") !important;
+}
+
 /* Capa defensiva (mismo motivo que la del tile del Desk mas arriba): refuerza
  * la especificidad con el prefijo html[data-swift-sidebar-fill="brand"] que
  * usan las reglas de swift-sidebar.css sobre .sidebar-header. La version sin
@@ -328,16 +360,33 @@ html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::before,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::before,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::before,
-html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before {
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::before,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::before {
 	background-color: var(--swift-primary, #0289f7) !important;
 }
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Autos"] .sidebar-header .header-logo::after,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Citas Taller"] .sidebar-header .header-logo::after,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Taller"] .sidebar-header .header-logo::after,
 html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Clientes"] .sidebar-header .header-logo::after,
-html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after {
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Proveedores"] .sidebar-header .header-logo::after,
+html[data-swift-sidebar-fill="brand"] .body-sidebar[data-title="Requisiciones"] .sidebar-header .header-logo::after {
 	background-color: #fff !important;
 }
+
+/*
+ * === Extension 11-oct-2026: "Requisiciones" (Desktop Icon.icon=
+ * "clipboard-list") sumado al mismo tratamiento ===
+ *
+ * Mismo origen que Clientes/Proveedores: glyph de 1 sola capa en trazo
+ * (stroke) del sprite Lucide (frappe/public/icons/lucide.svg, id
+ * "icon-clipboard-list"), sin formato bg+glyph nativo - requirio el mismo
+ * recorte manual (rect+paths del symbol copiados tal cual, envueltos en el
+ * mismo <g transform="translate(12,12) scale(1.25)" stroke="#000" ...> que
+ * ya usan clientes_glyph.svg/proveedores_glyph.svg). requisiciones_bg.svg
+ * reusa el mismisimo squircle 54x54 que comparten los otros 7 iconos ya
+ * desplegados.
+ */
+
 
 /*
  * === Extension 7-oct-2026: mismo diseno para 2 iconos ESTANDAR de ERPNext

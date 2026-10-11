@@ -80,8 +80,12 @@ app_license = "mit"
 # para el detalle completo de la causa). Archivo separado del de iconos
 # (preocupaciones distintas), mismo mecanismo de cache-busting manual "?v=N"
 # (ver nota de arriba de por que no sirve el hash automatico de assets.json).
+#
+# v=5 (11-oct-2026): se agrego la regla de "Requisiciones" (icon=
+# clipboard-list), modulo custom nuevo - mismo recorte manual desde Lucide
+# que Clientes/Proveedores. Mismo bump de cache-busting manual, mismo motivo.
 app_include_css = [
-	"/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=4",
+	"/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=5",
 	"/assets/bahia_theme/css/bahia_theme_datatable_header_fix.css?v=1",
 ]
 
@@ -153,9 +157,9 @@ app_include_js = [
 #   bench --site frontend export-fixtures
 fixtures = [
 	# Modulos custom migrados de GeneXus (shell Workspace + sidebar + tile)
-	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
-	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
-	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores"]]]},
+	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores", "Requisiciones"]]]},
+	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores", "Requisiciones"]]]},
+	{"dt": "Desktop Icon", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores", "Requisiciones"]]]},
 	# Desktop Icon estandar de erpnext/frappe/hrms puestos en hidden=1 a mano
 	# (2026-10-01, tras el bench migrate de la instalacion de swift_theme que
 	# reseteo hidden=0 en 41 de ellos sin que nadie lo pidiera). Filtrado por
