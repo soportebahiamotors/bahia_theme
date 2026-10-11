@@ -108,5 +108,27 @@
   "roles": [],
   "sidebar": null,
   "standard": 0
+ },
+ {
+  "app": "bahia_theme",
+  "bg_color": "gray",
+  "docstatus": 0,
+  "doctype": "Desktop Icon",
+  "hidden": 0,
+  "icon": "clipboard-list",
+  "icon_image": null,
+  "icon_type": "Link",
+  "label": "Requisiciones",
+  "link": null,
+  "link_to": "Requisiciones",
+  "link_type": "Workspace Sidebar",
+  "logo_url": null,
+  "modified": "2026-10-11 11:26:54.089274",
+  "name": "Requisiciones",
+  "parent_icon": null,
+  "restrict_removal": 0,
+  "roles": [],
+  "sidebar": null,
+  "standard": 0
  }
 ]
