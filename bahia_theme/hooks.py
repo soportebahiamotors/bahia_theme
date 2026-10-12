@@ -86,7 +86,7 @@ app_license = "mit"
 # que Clientes/Proveedores. Mismo bump de cache-busting manual, mismo motivo.
 app_include_css = [
 	"/assets/bahia_theme/css/bahia_theme_reactive_icons.css?v=5",
-	"/assets/bahia_theme/css/bahia_theme_datatable_header_fix.css?v=1",
+	"/assets/bahia_theme/css/bahia_theme_datatable_header_fix.css?v=2",
 ]
 
 # Fix de condicion de carrera de swift_theme.api.boot.set_user_pref (ver
