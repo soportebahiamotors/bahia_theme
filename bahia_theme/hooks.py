@@ -156,6 +156,12 @@ app_include_js = [
 # de ninguna app). Regenerar con:
 #   bench --site frontend export-fixtures
 fixtures = [
+	# Client Script del wizard "Nueva Cita de Taller" (2026-10-01, v3
+	# 2026-10-12) - reemplaza el "+ Agregar" estandar de "Cita de Taller".
+	# El modulo Python que consume (bahia_theme/api.py) NO es un DocType,
+	# asi que no requiere developer_mode ni fixture propio - viaja con el
+	# codigo del app en el repo.
+	{"dt": "Client Script", "filters": [["name", "in", ["Cita de Taller Wizard Nuevo"]]]},
 	# Property Setter puntuales creados a mano sobre DocTypes estandar/custom
 	# (only_select en el Link "cliente" de Cita de Taller, 2026-10-11; y
 	# show_title_field_in_link en Customer para que las columnas Link de
