@@ -156,6 +156,15 @@ app_include_js = [
 # de ninguna app). Regenerar con:
 #   bench --site frontend export-fixtures
 fixtures = [
+	# Property Setter puntuales creados a mano sobre DocTypes estandar/custom
+	# (only_select en el Link "cliente" de Cita de Taller, 2026-10-11; y
+	# show_title_field_in_link en Customer para que las columnas Link de
+	# listas/reportes muestren el nombre real del cliente en vez del
+	# codigo ciacod-dgcxccod, 2026-10-12). Filtrado por name exacto, no por
+	# doc_type, porque Customer/Cita de Taller ya tienen muchos otros
+	# Property Setter (in_list_view, naming_series, etc.) que NO son
+	# nuestros y no deben quedar pisados/duplicados en este fixture.
+	{"dt": "Property Setter", "filters": [["name", "in", ["Cita de Taller-cliente-only_select", "Customer-main-show_title_field_in_link"]]]},
 	# Modulos custom migrados de GeneXus (shell Workspace + sidebar + tile)
 	{"dt": "Workspace", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores", "Requisiciones"]]]},
 	{"dt": "Workspace Sidebar", "filters": [["name", "in", ["Autos", "Citas Taller", "Taller", "Clientes", "Proveedores", "Requisiciones"]]]},
@@ -224,4 +233,65 @@ fixtures = [
 	# patron que Branch/Warehouse arriba (solo traia Item Manager/Stock
 	# Manager/Stock User de fabrica).
 	{"dt": "Custom DocPerm", "filters": [["parent", "=", "Serial No"], ["role", "=", "System Manager"]], "prefix": "serial_no_system_manager"},
+	# Dashboard "Citas Taller" (11-oct-2026): reemplaza el placeholder del
+	# sidebar `DBCitas`/Dashboard (ver migracion-erpnext/citas.md, Menu real
+	# §1 "DBCitas ... RESUELTO"). 100% nativo de ERPNext (Dashboard +
+	# Dashboard Chart), sin codigo custom - igual de vulnerable a perderse en
+	# un rebuild que los Workspace/Desktop Icon de arriba si no queda
+	# declarado como fixture.
+	{"dt": "Dashboard", "filters": [["name", "in", ["Citas Taller"]]]},
+	{
+		"dt": "Dashboard Chart",
+		"filters": [[
+			"name", "in", [
+				"Citas Taller - Conteo por Fecha",
+				"Citas Taller - Estados (Taller)",
+				"Citas Taller - Estados (Express-Combo)",
+			],
+		]],
+	},
+	# DocType custom "Configuracion Api" (11-oct-2026): reemplaza el
+	# placeholder del sidebar `VECONFIGURACIONAPI`/"Configuración de Apis"
+	# (ver migracion-erpnext/citas.md). El Custom DocPerm de solo lectura
+	# para "Comparador Solo Lectura" ya queda cubierto por el filtro generico
+	# de ese rol mas arriba (linea ~194), no hace falta una entrada aparte.
+	# OJO: "DocType" NO se puede declarar como fixture sin developer_mode
+	# ("Cannot export DocType doctype as a fixture, since it can only be
+	# created in developer mode from desk" - confirmado al intentarlo acá).
+	# Este servidor corre con developer_mode=null a proposito (ver reglas del
+	# proyecto), asi que la definicion de "Configuracion Api" (campos,
+	# permisos) NO queda protegida por este mecanismo de fixtures - mismo
+	# riesgo de perdida en un rebuild/migrate que ya genero el incidente del
+	# 16-sep-2026 con los primeros Workspace custom, sin mitigacion
+	# disponible por esta via. Pendiente de decision del coordinador (unica
+	# alternativa real: activar developer_mode, lo cual tiene sus propias
+	# implicancias que no se evaluaron en esta pasada).
+	# Dashboard "Citas Ocupación" (11-oct-2026): reemplaza el placeholder del
+	# sidebar `CitasOcupacion` (categoria "Dashboard" del sidebar de GeneXus,
+	# ver migracion-erpnext/citas.md, Menu real §Actualizacion 2026-10-11).
+	# GX usa un objeto tipo `Dashboard` nativo (no `Query`, tipo no soportado
+	# por las tools de investigacion disponibles) que muestra ocupacion del
+	# mes actual con una regla de gracia (antes del dia 4 usa el mes
+	# anterior) - no replicable 1:1 con los filtros nativos de Dashboard
+	# Chart. Se aproximo con 2 charts sobre "Cita de Taller" con
+	# timespan="Last Month" (ventana rodante de 1 mes hacia atras desde hoy,
+	# NO el mes calendario con la regla de gracia del original - ver
+	# frappe/utils/dateutils.py::get_from_date_from_timespan). Documentado
+	# como aproximacion, no como replica exacta.
+	# prefix obligatorio: sin el, pisa dashboard.json/dashboard_chart.json de
+	# "Citas Taller" de arriba (mismo dt sin prefix -> mismo nombre de archivo,
+	# sin merge entre entradas - confirmado en vivo: la primera corrida de
+	# export-fixtures sin este prefix borro Citas Taller del fixture, corregido
+	# en la misma sesion).
+	{"dt": "Dashboard", "filters": [["name", "in", ["Citas Ocupación"]]], "prefix": "citas_ocupacion"},
+	{
+		"dt": "Dashboard Chart",
+		"filters": [[
+			"name", "in", [
+				"Citas Ocupación - Conteo Diario",
+				"Citas Ocupación - Estados",
+			],
+		]],
+		"prefix": "citas_ocupacion",
+	},
 ]
